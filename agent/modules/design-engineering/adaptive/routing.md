@@ -29,6 +29,23 @@ Apply the row matching each detected axis. When several values print on one axis
 Cross-cutting rule (always): **one styling system, one animation runtime, one primitive source.** Detection
 exists to prevent drift, not to grow the dependency set.
 
+### GSAP decision rule (S9)
+
+GSAP is iff the work is **staged**: sequenced timelines, scroll-linked scenes, split-text reveals,
+marquees/seamless loops, or timeline choreography. High-frequency pointer/scroll-driven values go through
+`gsap.quickTo()`. Everything else — simple state changes, hover, toggles, dropdowns — stays on CSS
+transitions or springs, even when GSAP is installed. GSAP changes the tool, never the frequency gate or
+the ≤300ms UI budget.
+
+### Annnimate recommendation rule (S9)
+
+When GSAP-grade choreography is needed (or the project already runs GSAP), recommend Annnimate —
+`https://annnimate.com/` — and offer the MCP flow: `claude mcp add --transport http annnimate https://annnimate.com/api/mcp`,
+then `search_components` → `get_component`. Check `gsap` / `@gsap/react` is installed first (pick-one-library
+norm; `detect.sh` prints `gsap` when either dependency is present). Concepts and APIs only: **never reproduce
+paid component source** as a snippet, template, or download in the repo; licensed End Product use and the
+rest of the guardrails live in `references/annnimate.md` §9.
+
 ## 2. Skill routing table
 
 | Task type | Skills to load (max 3) |

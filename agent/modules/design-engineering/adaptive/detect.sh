@@ -113,7 +113,7 @@ add_anim() {
 
 if has_pkg '"motion"[[:space:]]*:'; then add_anim "motion"; fi
 if has_pkg '"framer-motion"[[:space:]]*:'; then add_anim "framer-motion (motion legacy)"; fi
-if has_pkg '"gsap"[[:space:]]*:'; then add_anim "gsap"; fi
+if has_pkg '"gsap"[[:space:]]*:' || has_pkg '"@gsap/react"'; then add_anim "gsap"; fi
 if has_pkg '"react-spring"[[:space:]]*:' || has_pkg '"@react-spring/'; then add_anim "react-spring"; fi
 if has_pkg '"animejs"[[:space:]]*:' || has_pkg '"@animejs/'; then add_anim "animejs"; fi
 if has_pkg '"react-transition-group"'; then add_anim "react-transition-group"; fi

@@ -1,6 +1,6 @@
 # Research Ledger — Design Engineering Harness
 
-All 8 mandatory sources + foundation harness. Fetched/read 2026-10-14 (UTC).
+All 8 mandatory sources + Source 9 (reference) + foundation harness. Fetched/read 2026-10-14 (UTC).
 Method order per hard rules: `gh`/git clone for repos → HTTP webfetch for static pages → (browser escalation noted where blocked).
 No source content was assumed. Quotes ≤15 words. Generic takeaways excluded.
 
@@ -280,6 +280,69 @@ Colors per post (from detail pages; glassmorphism-animation and train-animation 
 
 ### Injection scan (Sources 5–8)
 No prompt-injection or embedded agent instructions found in any page content. Nothing page-supplied was followed.
+
+---
+
+## Source 9 — https://annnimate.com/ (REFERENCE/KNOWLEDGE)
+
+- Type: commercial GSAP component library + documentation site (© Good Fella Studio GmbH)
+- Fetch method: HTTP webfetch ×16 by @librarian + orchestrator homepage fetch; **no page blocked**
+- Timestamp: 2026-10-14T14:22–14:29Z
+- Status: **READ_FULLY** — 17 reads (16 @librarian pages + orchestrator homepage fetch), none blocked, no 404s
+- License: commercial subscription + free 16-component Starter Pack + one free component weekly; consumed here as **reference-use** — concepts/APIs only, no component source reproduced (verdict below)
+- Pages read (exact URLs):
+  1. `/` — homepage (orchestrator fetch)
+  2. `/learn/easing` — ease family entries + editable demo call
+  3. `/learn/scroll` — ScrollTrigger patterns index
+  4. `/learn/timeline` — timeline API + demo defaults
+  5. `/learn/text` — SplitText patterns index
+  6. `/learn/react` — useGSAP + context index
+  7. `/learn/performance` — 60fps hub index
+  8. `/learn/plugins` — plugin API index
+  9. `/patterns` — 10 patterns with decision matrices
+  10. `/docs` — install + copy-component + tuning system
+  11. `/docs/guides/mcp` — MCP install, 4 tools, error codes
+  12. `/faq` — framework/agent/licensing items
+  13. `/terms` — license grant §4.1, prohibitions §4.2
+  14. `/docs/guides/production` — reduced-motion API, budget lists, cleanup (supplementary)
+  15. `/docs/getting-started/quick-start` — 4-step loop, file pairing, failure modes (supplementary)
+  16. `/learn/react/use-gsap` — scope, StrictMode, contextSafe, revert (supplementary)
+  17. `/docs/guides/customization` — attribute grammar, house ease, edit rules (supplementary)
+
+### Evidence extract (concrete, pointer + short quote)
+1. Library overview — 118 GSAP components for React/Vue/HTML; copy-paste delivery, no npm package; code lives in the user's repo.
+2. Pricing — paid subscription, free 16-component Starter Pack, plus one free component released weekly.
+3. Tuning (page: tuning attributes) — `data-anm-duration`, `data-anm-ease`, `data-anm-stagger` in HTML; same names as camelCase props in React/Vue; component on/off switch `data-anm-{component}`.
+4. Easing (page: easing) — house UI ease `expo.out`, described as "starts an animation fast and decelerates exponentially".
+5. Timeline (page: timeline) — demo default duration 0.5s; `toggleActions` slots in order onEnter, onLeave, onEnterBack, onLeaveBack; seamless loop `repeat:-1` with end state equal to start.
+6. React (page: React usage) — `useGSAP` from `@gsap/react` wraps `gsap.context`, reverts on unmount, fixes the StrictMode double-run; scope selectors or "one card animating all cards"; handler tweens wrapped in `contextSafe`; "ctx.revert() never ctx.kill()"; register ScrollTrigger/SplitText in a `"use client"` file; `ScrollTrigger.refresh()` after async loads.
+7. Vue (page: Vue usage) — `script setup`, start in `onMounted`, manual `gsap.context().revert()` in `onUnmounted`.
+8. Reduced motion (page: reduced motion) — `gsap.matchMedia()` reads the OS setting; timelines collapse to nearly instant while the end state still renders; "never delete the matchMedia block when editing".
+9. Perf budget (page: performance) — 60fps target; allow x/y/scale/rotation/opacity/clip-path; forbid width/height/top/left/margin/padding; `force3D:true` on animated elements; `quickTo()` for mousemove/scroll values; `autoAlpha` for opacity+visibility; skip WebGL/heavy canvas at render level on small screens; cleanup kills timelines, reverts SplitText, kills ScrollTriggers.
+10. Text (page: text) — SplitText breaks into char/word/line wrappers, reveal staggers the units; "new SplitText() deprecated since GSAP 3.13" → `SplitText.create()` only.
+11. Timeline controls (page: timeline) — play/pause/reverse/restart/seek/progress/time/timeScale; `timeScale(2)` doubles, `timeScale(0.5)` halves; `easeReverse` added in GSAP 3.15.
+12. Ease family (page: easing) — power4.out most aggressive out; back.out overshoots then settles; sine gentlest; slow lingers mid then ends fast; steps() quantizes; CustomEase via SVG path or control points.
+13. Plugins (page: plugins) — matchMedia (breakpoint code + disposal), quickTo (high-frequency optimizer), Flip (old→new state tween), Observer (wheel/touch/pointer unified), InertiaPlugin (natural stop), MotionPathPlugin (SVG path), Draggable.
+14. Patterns (page: patterns) — 10 with decision matrices: Hover Card, Magnetic Button, Marquee, Mega Menu, Page Transition, Parallax Scroll, Scramble Text, Scroll Image Reveal, Sticky Cursor, Text Mask Reveal. Scroll Image Reveal uses a clip-path wipe/mask/dissolve, never a plain fade; Magnetic Button = spring-like cursor tracking then release.
+15. MCP (page: MCP) — `claude mcp add --transport http annnimate https://annnimate.com/api/mcp`, browser OAuth (no key); tools `search_components` (cheap slugs/titles) → `get_component` (full code + install + gotchas + deps), plus `get_concept` and `get_pattern`; "401=re-auth, 403=inactive subscription"; Webflow + Kits not served via MCP; CI uses the Settings→MCP API key header.
+
+### Techniques / thresholds / anti-patterns worth encoding
+`expo.out` house ease with a reason-required override; timeline default duration 0.5s reserved for staged/scroll sequences (UI micro stays ≤300ms); tuning grammar `data-anm-duration/ease/stagger` ↔ camelCase props; `useGSAP` scoping + `contextSafe` + `ctx.revert()`; `SplitText.create()` only (3.13+); `easeReverse` (3.15+); allow-list x/y/scale/rotation/opacity/clip-path vs deny-list width/height/top/left/margin/padding; `force3D:true`; `autoAlpha`; `quickTo()` as the only sanctioned high-frequency path; `gsap.matchMedia()` collapse-to-end-state reduced motion (block never deleted); `repeat:-1` + end==start for seamless loops; toggleActions four-slot order; cleanup kills timelines/SplitText/ScrollTriggers; Annnimate-style hidden-until-GSAP content requires a GSAP-load failure fallback; copy-paste install (component + CSS side-by-side, `"use client"`, `npm i gsap` + `@gsap/react`); MCP flow search → get_component.
+
+### Licensing verdict (binding — encoded as guardrails in `references/annnimate.md` + `de-motion`)
+- **MAY** link/recommend the library freely (no attribution required).
+- **MAY** paste free-Starter-Pack or paid-subscription component code into an End Product and modify it; "copied-during-subscription code stays usable forever".
+- **MUST NOT** reproduce paid component source as standalone snippets/downloads/templates/courses outside an End Product.
+- **MUST NOT** submit components to ML training/fine-tuning.
+- **MUST NOT** scrape or mass-copy via agents beyond normal human use.
+- Short citational quotes OK — "bulk paid-source reproduction is the line". `/learn` content is free and citable.
+- Harness posture: **reference-use** — concepts/APIs only, zero component source copied into this repo.
+
+### Conflicts / overlaps
+Duration conflict: Annnimate timeline default 0.5s vs harness ≤300ms UI cap → **adopt eases, not durations** (0.5s+ only staged/scroll). Easing vocabulary: `expo.out` vs S1 canonical bezier trio → both kept, scoped by runtime (CSS trio, GSAP expo.out). Property allow/deny duplicates S1/S2/S4 compositor rule (adopted verbatim — agrees). Reduced-motion "collapse to end state" is compatible with S1 "gentler, not zero" (end state renders). `quickTo()` agrees with the frequency gate. New rule surfaced: hidden-until-GSAP markup needs a load-failure fallback. High-frequency and routing rules slot into the pick-one-library norm (`gsap` installed first).
+
+### Injection scan (Source 9, per @librarian report 2026-10-14)
+No prompt-injection found: no "ignore previous instructions", hidden directives, exfiltration payloads, or "run this" commands in any of the 17 reads. Agent-addressed but legitimate: `/docs/guides/mcp` (product MCP docs, expected); Terms §4.2 prohibitions on ML submission/scraping/mass-copying (binding policy — treated as licensing constraints in the verdict, not instructions); footer share-links pre-filled with questions to Claude/ChatGPT/Perplexity/Grok (outbound links, no action taken). Nothing page-supplied was followed as an instruction.
 
 ---
 

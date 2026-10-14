@@ -2,6 +2,39 @@
 
 All notable changes to the design-engineering harness. Dates are UTC.
 
+## v0.2.0 — 2026-10-14
+
+Annnimate (S9, https://annnimate.com/) integrated as the GSAP foundation knowledge: library guide, de-motion
+GSAP section, values/routing additions, `@gsap/react` detection, and S9 research rows.
+
+### Added
+
+- `agent/modules/design-engineering/references/annnimate.md` — library guide: what it is, routing conditions,
+  install loop, `data-anm-*` tuning grammar, MCP workflow (command, 4 tools, error codes), `/learn` concept
+  index + 10 patterns, React/Vue contracts, reduced-motion + performance budget tables, licensing
+  guardrails (may/must-not), S9 attribution.
+- `de-motion` — new **"GSAP via Annnimate"** section: five cases where GSAP earns its place, `useGSAP`
+  contract (scope/`contextSafe`/`ctx.revert()`/StrictMode/registration), `expo.out` default with the ≤300ms
+  UI clamp, property allow/deny, reduced-motion collapse-to-end-state, `quickTo()` for high-frequency,
+  Annnimate routing + licensing rule (never paste paid source as a reusable snippet), GSAP-load failure
+  fallback; Sources section gains S9.
+- `references/values.md` — GSAP/Annnimate table (expo.out, timeline `0.5` default, `toggleActions` 4-slot
+  order, `repeat:-1` seamless loop, `timeScale(2/0.5)`, `SplitText.create()` 3.13+, `easeReverse` 3.15+,
+  `quickTo`, `force3D`, `autoAlpha`, `data-anm-duration/ease/stagger`, allow/deny lists, velocity) — every
+  row provenance S9.
+- `adaptive/routing.md` — GSAP decision rule (GSAP iff staged/scroll/text-split/marquee/timeline; `quickTo`
+  for high-frequency; else CSS/springs) + Annnimate recommendation rule (check `gsap`/`@gsap/react` first,
+  MCP flow, never reproduce paid source).
+- `research/ledger.md` **Source 9** (16 pages, READ_FULLY, 14:22–14:29Z, no blocks) + `SOURCES.md` **S9 row**
+  (© Good Fella Studio GmbH, reference-use) + `ARCHITECTURE.md` §1/§2/§3 + `research/synthesis.md` §4
+  (S9 addendum: 7 conflict resolutions).
+
+### Changed
+
+- `adaptive/detect.sh` — animation axis now also matches `"@gsap/react"` and reports `gsap` (either
+  dependency alone counts; verified with `bash -n` + `@gsap/react`-only fixture → `animation: gsap`).
+- `SOURCES.md` per-skill table: `de-motion` supporting column += S9; license + injection-scan notes += S9.
+
 ## v0.1.0 — 2026-10-14
 
 First build: foundation-harness conventions extended with a design-engineering layer, backed by an 8-source research pass.

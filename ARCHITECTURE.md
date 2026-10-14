@@ -7,11 +7,12 @@ reference library + gates in a new `agent/modules/design-engineering/` module, r
 Target agents: Claude Code + OpenCode/Cursor via `~/.claude/skills` (+ AGENTS.md pointer for Codex).
 Stack preset: Next.js (App Router) + Tailwind v4 + Motion + Radix/shadcn, auto-detect otherwise.
 
-Evidence base: `research/ledger.md` (all 8 sources READ_FULLY) + `research/synthesis.md`.
+Evidence base: `research/ledger.md` (all 8 sources + S9 READ_FULLY) + `research/synthesis.md`.
 License posture: all skill sources MIT (Emil Kowalski, Julien Thibeaut/ibelick, Jakub Krehel) — adapt structure/values,
 no large verbatim copies; per-skill Sources section + `SOURCES.md`. Floguo/BoardUI/BeautifulUI/Inspora content is
-studied as reference (teardown/facts, not copied text). Foundation harness has NO license — new repo ships with an
-explicit license (Phase 6 decision) and does not redistribute foundation files wholesale.
+studied as reference (teardown/facts, not copied text). Annnimate (S9) is commercial, © Good Fella Studio GmbH —
+concepts/APIs only, licensing guardrails encoded in `references/annnimate.md`. Foundation harness has NO license —
+new repo ships with an explicit license (Phase 6 decision) and does not redistribute foundation files wholesale.
 
 ## 1. Skill set (8 skills)
 
@@ -20,7 +21,7 @@ Naming: `de-*` prefix avoids collisions with foundation skills and reads as slas
 | Skill | Purpose | Trigger conditions (frontmatter "Use when") | Sources |
 |---|---|---|---|
 | `de-feel` | Interaction polish pass: typography/surface/animation/icon/performance micro-fixes with exact values + review table | "feels off", polish pass, reviewing UI code; quick (cap 5, HIGH/MED only) vs full (cap 15) modes | S4 primary (19 principles, values, review format); S1 support (frequency gate, curves, durations) |
-| `de-motion` | Build / review / audit / find animation; performance diagnosis | add motion, janky animation, "audit the motion", "what could animate"; refuses keyboard/high-frequency motion | S1 primary (animate, review-animations+STANDARDS, improve-animations, find-opportunities, animation-performance); S4 support (icon constants, restraint) |
+| `de-motion` | Build / review / audit / find animation; performance diagnosis | add motion, janky animation, "audit the motion", "what could animate"; refuses keyboard/high-frequency motion | S1 primary (animate, review-animations+STANDARDS, improve-animations, find-opportunities, animation-performance); S4 support (icon constants, restraint); S9 support (GSAP via Annnimate: useGSAP contract, expo.out, property allow/deny, quickTo, reduced-motion matchMedia, licensing guardrails) |
 | `de-a11y` | Accessibility audit + minimal targeted fixes | interactive controls, forms/dialogs, keyboard/focus, WCAG review | S3 primary (9 categories, triples); S2 support (fixing-accessibility file); S4 (44px/40px hit areas); S1 (reduced-motion, hover gating) |
 | `de-component` | Component craft: anatomy, states, variants, keyboard/a11y contract, tokens | new component, "build a segmented control", component review | S6 primary (segmented-control teardown as exemplar method); S2 (baseline-ui constraints, component-canvas discipline); S1 (Sonner principles, pick-ui-library routing) |
 | `de-type-space` | Typography + spacing system: scale, rhythm, rendering details, token naming | type setup, spacing audit, "fix the typography" | S4 typography.md (balance/pretty, smoothing, tabular); S2 baseline-ui (bans, tabular); S6 type tokens (Inter, scale-per-Figma); spacing system = **original synthesis** (gap S6.1) |
@@ -38,7 +39,8 @@ toast-library internals (S1 ask-sonner → collapsed into `de-component` toast p
 - `teardowns/segmented-control.md` — full teardown exemplar: anatomy (tertiary track + sliding thumb), API (key-set `selectedKeys`/`onSelectionChange`/`defaultSelectedKeys`, never-empty invariant), keyboard (arrows move/Space selects via React Aria ToggleButtonGroup), tokens (light `neutral-100`/white; dark `neutral-925`/`neutral-800`), install (`npx boardui@latest add`), dark-mode doctrine, edge cases. Source: S6. Template reused for future teardowns.
 - `inspiration.md` — S8 index: 16 posts grouped by genre (footers ×3, cards ×4, portfolios/identity ×7, menus/FAQ ×2) + per-post why-it-works (1 line) + tags (Industries/Colors/Styles) + rule: any borrowed pattern must ship states+a11y+reduced-motion. Source: S8.
 - `tokens.md` — token-system exemplar from S6 theme.css (OKLCH primitives, 11-stop accent ramp, semantic light/dark pairs, radii `2lg:10px`/`2-5xl:20px`, 6%/10% shadows, Inter/JetBrains Mono) + S2 DESIGN.md schema as the capture format. Source: S6 primary, S2 support.
-- `values.md` — single source of truth for all magic numbers (curves, durations, scales, stagger, blur caps, hit areas, velocity `0.11`, rubberband `0.55`, decay `0.998`) with per-value provenance. Sources: S1+S4 (+S2/S6 where stricter).
+- `values.md` — single source of truth for all magic numbers (curves, durations, scales, stagger, blur caps, hit areas, velocity `0.11`, rubberband `0.55`, decay `0.998`, plus the S9 GSAP table) with per-value provenance. Sources: S1+S4 (+S2/S6 where stricter, S9 for GSAP).
+- `annnimate.md` — Annnimate (commercial GSAP library) guide: routing conditions, install loop, `data-anm-*` tuning grammar, MCP workflow, concept/pattern index, React/Vue contracts, reduced-motion + perf budget tables, binding licensing guardrails. Source: S9 (reference-use, no component source copied).
 
 ## 3. Traceability matrix
 
@@ -52,6 +54,7 @@ toast-library internals (S1 ask-sonner → collapsed into `de-component` toast p
 | S6 BoardUI segmented-control | `de-component` (teardown method), `teardowns/segmented-control.md`, `tokens.md`, `de-type-space` |
 | S7 BeautifulUI | `de-taste` (quality bar), `de-site`, `patterns.md` |
 | S8 Inspora | `de-taste`, `de-site`, `inspiration.md` |
+| S9 Annnimate (commercial — reference-use, guardrails encoded) | `de-motion` (GSAP section), `values.md` (GSAP table), `adaptive/routing.md` (GSAP + recommendation rules), `references/annnimate.md` |
 | Foundation harness (unlicensed — conventions only, no redistribution) | skill/command formats, router registration, module layout, `bootstrap.sh --design`, evidence-trail norm |
 
 Every skill maps back to ≥1 source above; `de-type-space` (spacing half), `de-taste` (method), `de-site` (workflow), adaptive layer, and gate mechanics carry explicit **original synthesis** labels in their files. No source unmapped; no skill sourceless.

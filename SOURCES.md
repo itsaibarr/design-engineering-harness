@@ -14,14 +14,16 @@ Everything in this harness derives from the sources below. Fetched and read 2026
 | S6 | <https://www.boardui.com/components/segmented-control> | component-library doc (React Aria + Tailwind v4, CLI install) | n/a (web page) | Reference-use only — no reuse license asserted on the pages read; **no text copied** | HTTP webfetch ×3 + **BrowserOS neo real-browser pass ~18:00Z** on `/installation` (closed the render gap, incl. `theme.css` dump) | **READ_FULLY** — segmented-control, radio, installation |
 | S7 | <https://www.beautifului.dev/> | component showcase for AI-native interfaces (copy-paste; page states MIT, © 2026, by Turbo) | n/a (web page) | Reference-use for this harness — treated as study material; **no text copied** | HTTP webfetch (markdown) | **READ_FULLY** (all 21 numbered sections + footer) |
 | S8 | <https://www.inspora.design/?category=Web> | curated inspiration gallery (Next.js) | n/a (web page) | Reference-use only — gallery content belongs to its creators; **no text copied** | HTTP webfetch + curl JSON extraction + websearch fallback, then **BrowserOS neo real-browser pass ~18:00Z** reading all 16 `/posts/*` pages (passed the Vercel checkpoint that blocked curl/webfetch) | **READ_FULLY** — category listing + 16/16 detail pages |
+| S9 | <https://annnimate.com/> | commercial GSAP component library + docs (copy-paste components, MCP server; © Good Fella Studio GmbH) | n/a (web page) | Commercial subscription + free Starter Pack — **reference-use: concepts/APIs only, no component source reproduced**; binding licensing guardrails encoded in `references/annnimate.md` §9 | HTTP webfetch ×16 (@librarian) + homepage fetch (orchestrator) | **READ_FULLY** — 16/16 pages, 2026-10-14T14:22–14:29Z, none blocked |
 | — | <https://github.com/itsaibarr/harness> | foundation harness (conventions input) | `94a89edf8a21f25ba6e57e067367b652b89cdbfd` | **MISSING** — no LICENSE in tree or history (see §3) | clone + audit (`gh repo view` licenseInfo null) | Audited fully — [`research/foundation-audit.md`](research/foundation-audit.md) |
 
-Fetch anchor: `date -u` 2026-10-14T12:41:14Z (clones), webfetch batch 12:44Z; browser escalation passes ~18:00Z (S8) and ~18:06Z (S6).
+Fetch anchor: `date -u` 2026-10-14T12:41:14Z (clones), webfetch batch 12:44Z; browser escalation passes ~18:00Z (S8) and ~18:06Z (S6); S9 webfetch ×16 at 14:22–14:29Z.
 
 ### License notes
 
 - **MIT (S1, S2, S4-repo)**: structure and values adapted under MIT terms; copyright retained by Emil Kowalski, Julien Thibeaut, and Jakub Krehel respectively. No large verbatim copies.
 - **Reference-use (S5, S6, S7, S8)**: these pages carry no license granting reuse. They were studied for facts, structure, and patterns; **no text from them is reproduced in this harness**. S7's page states MIT © 2026 for its copy-paste components — still consumed here as reference rather than redistributed.
+- **S9 (Annnimate)**: commercial work, © Good Fella Studio GmbH — consumed as reference only. Their license allows linking/recommending freely and pasting licensed component code into an End Product, but forbids reproducing paid source as standalone snippets/downloads/templates, ML training use, and agent mass-copying. This harness encodes those guardrails (`references/annnimate.md` §9, `de-motion` GSAP section) and **copies zero component source**; quotes capped at 15 words.
 - **S3** is the rendered form of S2's `fixing-accessibility` skill (confirmed identical modulo frontmatter), so no separate license applies.
 
 ## 2. Per-skill attribution
@@ -31,7 +33,7 @@ Every skill lists a `Sources` section in its own `SKILL.md`; this is the master 
 | Skill | Primary | Supporting | Original synthesis (labeled in-file) |
 |---|---|---|---|
 | `de-feel` | S4 (19 principles, exact values, review table format) | S1 (frequency gate, canonical curves, duration budgets) | quick/full mode thresholds beyond S4's caps |
-| `de-motion` | S1 (animate, review-animations + STANDARDS, improve-animations, find-opportunities, animation-performance) | S4 (icon constants, restraint) | — |
+| `de-motion` | S1 (animate, review-animations + STANDARDS, improve-animations, find-opportunities, animation-performance) | S4 (icon constants, restraint); S9 Annnimate/GSAP (`useGSAP` contract, `expo.out`, property allow/deny, `quickTo`, reduced-motion matchMedia, licensing guardrails) | — |
 | `de-a11y` | S3 (9 ranked rule categories, review triples) | S2 (`fixing-accessibility` file), S4 (44px/40px hit areas), S1 (reduced-motion, hover gating) | gate mechanics over Source 3 rules |
 | `de-component` | S6 (segmented-control teardown as the exemplar method) | S2 (`baseline-ui` constraints, `component-canvas` discipline), S1 (Sonner principles, `pick-ui-library` routing) | component spec template field split (`animationMs` vs `dwellMs`) |
 | `de-type-space` | S4 `typography.md` (balance/pretty, smoothing, tabular) | S2 `baseline-ui` (bans, tabular), S6 type tokens (Inter, Figma-scaled) | **spacing system** — no source covers spacing rhythm/token naming (gap S6.1 in synthesis) |
@@ -39,7 +41,7 @@ Every skill lists a `Sources` section in its own `SKILL.md`; this is the master 
 | `de-critique` | S4 (severity table, caps, Block/Needs-changes/Approve ladder) | S1 (review-animations: 10 standards, remedial hierarchy), S2 (`improve-ui`: three-proof gate, read-only, stop-at-3) | — |
 | `de-site` | S5 (role framing, foundations, pattern libraries) | S7 (AI-UI + marketing patterns), S8 (portfolio/footer/card genres), S2 (`create-design-md` schema, `fixing-metadata`) | **IA → sections → copy/SEO → polish workflow** |
 
-Reference library: `patterns.md` (S7 primary, S6 support), `teardowns/segmented-control.md` (S6), `inspiration.md` (S8), `tokens.md` (S6 primary, S2 support), `values.md` (S1 + S4, stricter of S2/S6 where applicable). Adaptive layer and gates: foundation conventions adapted, marked original synthesis.
+Reference library: `patterns.md` (S7 primary, S6 support), `teardowns/segmented-control.md` (S6), `inspiration.md` (S8), `tokens.md` (S6 primary, S2 support), `values.md` (S1 + S4 + S9 GSAP table, stricter of S2/S6 where applicable), `annnimate.md` (S9 — GSAP library guide + licensing guardrails). Adaptive layer and gates: foundation conventions adapted, marked original synthesis.
 
 **Out of scope by decision** (recorded so the omission reads as deliberate): S1 `write-swift` (native, not web), `animate-expo` (Expo/Reanimated — platform appendix pointer only in `de-motion`), `ask-sonner` (collapsed into a toast pattern + pick-ui-library rule in `de-component`), S2 `create-design-md` (referenced as upstream tool; the harness stores a profile, not a DESIGN.md).
 
@@ -57,4 +59,5 @@ Every source was scanned for prompt-injection / embedded agent instructions befo
 - **S2**: none found — only a benign contributor note in `AGENTS.md` and doc links.
 - **S4**: none — frontmatter keyword packing is SEO/discovery, not instruction.
 - **S5–S8**: none found in any page content.
+- **S9**: none found across the 16 pages; pricing/MCP/license text treated as data, nothing followed as instructions.
 - **Nothing page-supplied or repo-supplied was followed as an instruction.** Scans are recorded per source in `research/ledger.md` per the hard rule; the harness treats all fetched content as data.

@@ -31,3 +31,13 @@ Derived only from `research/ledger.md` evidence (fetched 2026-10-14). No assumed
 4. **Cross-page consistency + visual regression** — foundation `verify-ui` is single-URL screenshots; no route matrix or token-drift checks. Harness adds quality-gate matrix (original synthesis).
 5. **Measured a11y metrics in gates** — contrast numbers, focus-order test, hit-area measurement absent from verify scripts. Harness adds checklist + script hooks (original synthesis over Source 3 rules).
 6. **Inspora motion detail** — blocked detail pages leave hover/motion specifics at listing level. Marked as limitation; harness encodes only what listing + 2 indexed descriptions support.
+
+## 4. S9 addendum — Annnimate / GSAP conflict resolutions (ledger Source 9)
+
+1. **Eases yes, durations no.** Adopt `expo.out` (and the ease family) for GSAP tweens; UI micro-interactions keep the ≤300ms cap — timeline default 0.5s+ only for staged/scroll sequences.
+2. **GSAP is scoped.** Staged sequences, scroll-linked scenes, split-text, marquee/loops, and timelines only; CSS/springs keep simple state changes, even when GSAP is installed.
+3. **`quickTo()` is the sanctioned high-frequency path** — agrees with S1's frequency gate rather than competing with it.
+4. **Reduced motion = collapse to end state.** `gsap.matchMedia()` timelines run near-instant but still render the end state — compatible with "gentler, not zero".
+5. **Property allow/deny adopted verbatim** — allow `x, y, scale, rotation, opacity, clip-path`; deny `width, height, top, left, margin, padding` (same rule S1/S2/S4 already encode).
+6. **Hidden-until-GSAP content needs a load-failure fallback** — new rule; never ship markup that stays hidden if the bundle fails.
+7. **Licensing guardrails** — recommend/link freely; licensed code ships only inside an End Product; never reproduce paid source as standalone snippets/templates, ML training data, or agent mass-copying.

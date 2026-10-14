@@ -2,8 +2,9 @@
 
 Every constant the `de-*` skills may quote, with provenance. **Prefer this file over quoting a
 source from memory.** Sources: **S1** emilkowalski/skills, **S2** ibelick/ui-skills,
-**S4** jakubkrehel/make-interfaces-feel-better, **S6** BoardUI. Conflict resolutions are from
-`research/synthesis.md` §2 and are cited in the Notes column as `R#`.
+**S4** jakubkrehel/make-interfaces-feel-better, **S6** BoardUI, **S9** Annnimate (GSAP table below).
+Conflict resolutions are from `research/synthesis.md` §2 (S9 items in §4) and are cited in the Notes
+column as `R#`.
 
 ## The table
 
@@ -53,6 +54,29 @@ source from memory.** Sources: **S1** emilkowalski/skills, **S2** ibelick/ui-ski
 | Shadow | 6% ambient / 10% key | shadow opacity recipe | S6 | Softer than Tailwind v4's 10% / 10%. |
 | Ramp | **11** stops (50 → 950) | accent ramp override point | S6 | One override re-tints the system. |
 | Theme | light `neutral-100` / `white`; dark `neutral-925` / `neutral-800` | segmented-control track / thumb | S6 | Active value always one step lighter than its track. |
+
+## GSAP / Annnimate values (S9)
+
+Adopted from `https://annnimate.com/` for GSAP-driven work; every row traced to ledger Source 9. Eases are
+adopted, durations are not — the ≤300ms UI cap above still binds (S9 addendum #1).
+
+| Category | Value | Applies to | Src | Notes / resolution |
+|---|---|---|---|---|
+| Ease | `expo.out` | default ease for GSAP tweens | S9 | House UI ease: fast start, exponential deceleration. Another ease only with a stated reason. |
+| Ease | `power4.out` / `back.out` / `sine` / `slow` / `steps()` | aggressive stop / overshoot-settle / gentlest / lingers-mid / quantized | S9 | Ease family from S9's easing page; pick per intent. |
+| Ease | `easeReverse` | reversed playback of an ease | S9 | Added in GSAP 3.15. |
+| Duration | `0.5` (seconds) | GSAP `timeline` defaults | S9 | Staged/scroll sequences only — UI micro-interactions stay ≤300ms (S1 cap). |
+| Timeline | `toggleActions: onEnter, onLeave, onEnterBack, onLeaveBack` | ScrollTrigger 4-slot order | S9 | Fixed slot order — never reorder. |
+| Timeline | `repeat: -1` + end state == start state | seamless loop | S9 | The only loop that doesn't visibly restart. |
+| Timeline | `timeScale(2)` / `timeScale(0.5)` | double / half playback speed | S9 | Controls also: play, pause, reverse, restart, seek, progress, time. |
+| Text | `SplitText.create()` | char/word/line wrappers | S9 | Constructor `new SplitText()` deprecated since GSAP 3.13. |
+| API | `gsap.quickTo()` | mousemove/scroll-driven values | S9 | Sanctioned high-frequency path — agrees with the frequency gate. |
+| Property | `force3D: true` | animated GSAP elements | S9 | Keeps transforms on their own layer. |
+| Property | `autoAlpha` | opacity + visibility together | S9 | One property for fade-and-hide. |
+| Attribute | `data-anm-duration` / `data-anm-ease` / `data-anm-stagger` | component tuning (HTML) | S9 | React/Vue: identical names as camelCase props; on-switch `data-anm-{component}`. |
+| Allow | `x`, `y`, `scale`, `rotation`, `opacity`, `clip-path` | GSAP animated properties | S9 | Matches the compositor rule (S1/S2/S4) — adopted verbatim. |
+| Deny | `width`, `height`, `top`, `left`, `margin`, `padding` | GSAP animated properties | S9 | Layout properties — never animated. |
+| Gesture | velocity `> 0.11` (distance ÷ elapsed time) | drag dismissal (any runtime, incl. GSAP) | S1 | S9 defines no velocity number; unit follows the distance/time inputs you pass. |
 
 ## Conflict resolutions applied (synthesis §2)
 
