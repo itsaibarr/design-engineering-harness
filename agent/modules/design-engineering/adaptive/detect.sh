@@ -137,7 +137,7 @@ add_comp() {
 if [ -f "$TARGET/components.json" ]; then add_comp "shadcn (components.json)"; fi
 if has_pkg '"@radix-ui/react-'; then add_comp "radix-ui"; fi
 if has_pkg '"@base-ui-components/'; then add_comp "base-ui"; fi
-if has_pkg '"react-aria"|"@react-aria/'; then add_comp "react-aria"; fi
+if has_pkg '"react-aria"|"@react-aria/|"react-aria-components"'; then add_comp "react-aria"; fi
 if has_pkg '"@headlessui/react"'; then add_comp "headlessui"; fi
 if has_pkg '"@mui/'; then add_comp "mui"; fi
 if [ -z "$components" ]; then
